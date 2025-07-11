@@ -1,4 +1,3 @@
-import PropTypes from 'prop-types';
 /**
  * TodoItem component represents a single task in the TODO list.
  * It displays the task text and provides buttons to delete the task,
@@ -38,12 +37,5 @@ function TodoItem({ task, deleteTaskCallback, moveTaskUpCallback, moveTaskDownCa
       </li>
   );
 }
-
-TodoItem.propTypes = {
-    task: PropTypes.string.isRequired,
-    deleteTaskCallback: PropTypes.func.isRequired,
-    moveTaskUpCallback: PropTypes.func.isRequired,
-    moveTaskDownCallback: PropTypes.func.isRequired,
-};
 
 export default TodoItem;
