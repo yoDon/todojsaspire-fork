@@ -29,6 +29,7 @@ function TodoList() {
     }
 
     async function addTask(event) {
+        event.preventDefault();
         if (newTaskText.trim()) {
             // call the API to add the new task
             const result = await fetch("/api/Todo", {
@@ -45,7 +46,6 @@ function TodoList() {
 
             setNewTaskText('');
         }
-        event.preventDefault();
     }
 
     async function deleteTask(id) {
