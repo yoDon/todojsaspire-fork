@@ -7,6 +7,7 @@ export default defineConfig(({ mode }) => {
   return {
     plugins: [react()],
     server:{
+      port: parseInt(env.VITE_PORT),
       proxy: {
         // "apiservice" is the name of the API in AppHost.cs.
         '/api': {
