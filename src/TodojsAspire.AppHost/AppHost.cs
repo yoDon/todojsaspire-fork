@@ -7,11 +7,9 @@ var apiService = builder.AddProject<Projects.TodojsAspire_ApiService>("apiservic
     .WithReference(db)
     .WithHttpHealthCheck("/health");
 
-// AddViteApp comes from community-toolkit
-// use `aspire add node` and select 'ct-extensions'
-builder.AddViteApp(name: "todo-frontend", workingDirectory: "../todo-frontend")
+// use `aspire add javascript` for `AddViteApp`
+builder.AddViteApp("todo-frontend", "../todo-frontend")
     .WithReference(apiService)
-    .WaitFor(apiService)
-    .WithNpmPackageInstallation();
+    .WaitFor(apiService);
 
 builder.Build().Run();
