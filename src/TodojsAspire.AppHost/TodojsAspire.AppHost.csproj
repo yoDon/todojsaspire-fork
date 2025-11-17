@@ -4,7 +4,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <UserSecretsId>4eedc806-4ce3-4289-a432-686772639387</UserSecretsId>
@@ -17,7 +17,7 @@
   <ItemGroup>
     <PackageReference Include="Aspire.Hosting.AppHost" Version="13.0.0" />
     <PackageReference Include="Aspire.Hosting.JavaScript" Version="13.0.0" />
-    <PackageReference Include="CommunityToolkit.Aspire.Hosting.Sqlite" Version="9.6.0" />
+    <PackageReference Include="CommunityToolkit.Aspire.Hosting.Sqlite" Version="9.9.0" />
   </ItemGroup>
 
 </Project>
