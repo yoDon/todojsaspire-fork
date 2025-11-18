@@ -73,11 +73,11 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Tag and push apiservice image to GHCR
+      - name: Tag and push todoapiservice image to GHCR
         if: ${{ github.ref == 'refs/heads/publish' }}
         run: |
           set -e
-          IMAGE_NAME=apiservice
+          IMAGE_NAME=todoapiservice
           IMAGE_TAG=$(docker images --format '{{.Repository}}:{{.Tag}}' | awk -F: -v name="$IMAGE_NAME" '$1==name {print $2; exit}')
           if [ -z "$IMAGE_TAG" ]; then
             if docker images "$IMAGE_NAME" --format '{{.Tag}}' | grep -q '^latest$'; then
