@@ -12,12 +12,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TodojsAspire.ApiService\TodojsAspire.ApiService.csproj" />
+    <ProjectReference Include="..\TodojsAspire.MigrationService\TodojsAspire.MigrationService.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Aspire.Hosting.AppHost" Version="13.0.0" />
     <PackageReference Include="Aspire.Hosting.JavaScript" Version="13.0.0" />
-    <PackageReference Include="CommunityToolkit.Aspire.Hosting.Sqlite" Version="9.9.0" />
+    <PackageReference Include="Aspire.Hosting.SqlServer" Version="13.0.0" />
   </ItemGroup>
 
 </Project>
