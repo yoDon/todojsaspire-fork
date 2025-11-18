@@ -9,14 +9,13 @@ export default defineConfig(({ mode }) => {
     server:{
       port: parseInt(env.VITE_PORT),
       proxy: {
-        // "apiservice" is the name of the API in AppHost.cs.
+        // "todoapiservice" is the name of the API in AppHost.cs.
         '/api': {
           target: 
-            process.env.services__apiservice__https__0 || 
-            process.env.services__apiservice__http__0,
+            process.env.TODOAPISERVICE_HTTPS ||
+            process.env.TODOAPISERVICE_HTTP,
           changeOrigin: true,
-          secure: false,
-          rewrite: (path) => path.replace(/^\/api/, "")
+          secure: false
         }
       }
     },
