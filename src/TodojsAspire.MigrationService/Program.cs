@@ -13,7 +13,7 @@ builder.AddServiceDefaults();
 
 builder.Services.AddDbContext<TodoDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("db1"), sqlOptions =>
-        sqlOptions.MigrationsAssembly("TodoJsAspire.MigrationService")
+        sqlOptions.MigrationsAssembly("TodojsAspire.MigrationService")
     ));
 
 // Optional: add enrichment (instrumentation) now that we're not using pooling.

@@ -44,10 +44,6 @@ app.MapDefaultEndpoints();
 
 app.MapTodoEndpoints();
 
-//using var scope = app.Services.CreateScope();
-//var dbContext = scope.ServiceProvider.GetRequiredService<TodoDbContext>();
-//await dbContext.Database.MigrateAsync();
-
 app.Run();
 
 record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)

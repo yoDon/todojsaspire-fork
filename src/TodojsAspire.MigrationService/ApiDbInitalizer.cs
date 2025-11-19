@@ -61,20 +61,10 @@ public class ApiDbInitalizer(
         var strategy = dbContext.Database.CreateExecutionStrategy();
         await strategy.ExecuteAsync(async () =>
         {
-            try
-            {
-                Console.WriteLine("running migration");
-                // Run migration in a transaction to avoid partial migration if it fails.
-                await using var transaction = await dbContext.Database.BeginTransactionAsync(cancellationToken);
-                await dbContext.Database.MigrateAsync(cancellationToken);
-                await transaction.CommitAsync(cancellationToken);
-                Console.WriteLine("Transaction committed");
-            }
-            catch(Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
-
+            // Run migration in a transaction to avoid partial migration if it fails.
+            await using var transaction = await dbContext.Database.BeginTransactionAsync(cancellationToken);
+            await dbContext.Database.MigrateAsync(cancellationToken);
+            await transaction.CommitAsync(cancellationToken);
         });
     }
 }
