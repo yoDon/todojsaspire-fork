@@ -12,7 +12,7 @@ builder.Services.AddHostedService<ApiDbInitalizer>();
 builder.AddServiceDefaults();
 
 builder.Services.AddDbContext<TodoDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("db1"), sqlOptions =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("tododb"), sqlOptions =>
         sqlOptions.MigrationsAssembly("TodojsAspire.MigrationService")
     ));
 

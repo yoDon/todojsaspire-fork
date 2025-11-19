@@ -1,16 +1,16 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
-var sqlserver = builder.AddSqlServer("sqlserver")
+var sqlserver = builder.AddSqlServer("todosqlserver")
     .WithLifetime(ContainerLifetime.Persistent);
 
-var db1 = sqlserver.AddDatabase("db1");
+var tododb = sqlserver.AddDatabase("tododb");
 
 var migrationService = builder.AddProject<Projects.TodojsAspire_MigrationService>("migration")
-    .WithReference(db1)
-    .WaitFor(db1);
+    .WithReference(tododb)
+    .WaitFor(tododb);
 
 var apiService = builder.AddProject<Projects.TodojsAspire_ApiService>("todoapiservice")
-    .WithReference(db1)
+    .WithReference(tododb)
     .WaitForCompletion(migrationService)
     .WithHttpHealthCheck("/health");
 

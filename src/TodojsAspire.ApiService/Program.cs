@@ -3,7 +3,7 @@ using TodojsAspire.ApiService;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.AddSqlServerDbContext<TodoDbContext>("db1");
+builder.AddSqlServerDbContext<TodoDbContext>("tododb");
 
 // Add service defaults & Aspire client integrations.
 builder.AddServiceDefaults();
