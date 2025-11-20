@@ -1,10 +1,17 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
-var db = builder.AddSqlite("db")
-    .WithSqliteWeb();
+var sqlserver = builder.AddSqlServer("todosqlserver")
+    .WithLifetime(ContainerLifetime.Persistent);
+
+var tododb = sqlserver.AddDatabase("tododb");
+
+var migrationService = builder.AddProject<Projects.TodojsAspire_MigrationService>("migration")
+    .WithReference(tododb)
+    .WaitFor(tododb);
 
 var apiService = builder.AddProject<Projects.TodojsAspire_ApiService>("todoapiservice")
-    .WithReference(db)
+    .WithReference(tododb)
+    .WaitForCompletion(migrationService)
     .WithHttpHealthCheck("/health");
 
 // use `aspire add javascript` for `AddViteApp`
