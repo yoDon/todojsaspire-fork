@@ -9,7 +9,7 @@ var sqlserver = builder.AddSqlServer("todosqlserver")
 
 var tododb = sqlserver.AddDatabase("tododb");
 
-var migrationService = builder.AddProject<Projects.TodojsAspire_MigrationService>("migration")
+var migrationService = builder.AddProject<Projects.TodojsAspire_MigrationService>("todomigration")
     .WithReference(tododb)
     .WaitFor(tododb);
 

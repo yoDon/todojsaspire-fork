@@ -73,11 +73,11 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Tag and push images (todoapiservice, todofrontend, migration) to GHCR
+      - name: Tag and push images (todoapiservice, todofrontend, todomigration) to GHCR
         if: ${{ github.ref == 'refs/heads/publish' }}
         run: |
           set -e
-          IMAGES="todoapiservice todofrontend migration"
+          IMAGES="todoapiservice todofrontend todomigration"
           for IMAGE_NAME in $IMAGES; do
             echo "Processing image: $IMAGE_NAME"
             IMAGE_TAG=$(docker images --format '{{.Repository}}:{{.Tag}}' | awk -F: -v name="$IMAGE_NAME" '$1==name {print $2; exit}')
