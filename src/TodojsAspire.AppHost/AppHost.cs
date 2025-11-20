@@ -4,7 +4,8 @@ var builder = DistributedApplication.CreateBuilder(args);
 builder.AddDockerComposeEnvironment("env");
 
 var sqlserver = builder.AddSqlServer("todosqlserver")
-    .WithLifetime(ContainerLifetime.Persistent);
+    .WithLifetime(ContainerLifetime.Persistent)
+    .WithExternalHttpEndpoints();
 
 var tododb = sqlserver.AddDatabase("tododb");
 
@@ -15,7 +16,8 @@ var migrationService = builder.AddProject<Projects.TodojsAspire_MigrationService
 var apiService = builder.AddProject<Projects.TodojsAspire_ApiService>("todoapiservice")
     .WithReference(tododb)
     .WaitForCompletion(migrationService)
-    .WithHttpHealthCheck("/health");
+    .WithHttpHealthCheck("/health")
+    .WithExternalHttpEndpoints();
 
 // use `aspire add javascript` for `AddViteApp`
 var frontend = builder.AddViteApp("todofrontend", "../todo-frontend")
