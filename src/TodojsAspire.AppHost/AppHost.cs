@@ -1,5 +1,8 @@
 var builder = DistributedApplication.CreateBuilder(args);
 
+// Add the following line to configure the Docker Compose environment
+builder.AddDockerComposeEnvironment("env");
+
 var sqlserver = builder.AddSqlServer("todosqlserver")
     .WithLifetime(ContainerLifetime.Persistent);
 
@@ -17,7 +20,8 @@ var apiService = builder.AddProject<Projects.TodojsAspire_ApiService>("todoapise
 // use `aspire add javascript` for `AddViteApp`
 var frontend = builder.AddViteApp("todofrontend", "../todo-frontend")
     .WithReference(apiService)
-    .WaitFor(apiService);
+    .WaitFor(apiService)
+    .WithExternalHttpEndpoints();
 
 apiService.PublishWithContainerFiles(frontend, "./wwwroot");
 

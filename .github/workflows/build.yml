@@ -100,3 +100,20 @@ jobs:
             docker push "$TARGET_REPO:latest"
           fi
           echo "Pushed image(s): $TARGET_REF and (possibly) $TARGET_REPO:latest"
+      - name: Aspire deploy (generate docker-compose)
+        if: ${{ github.ref == 'refs/heads/publish' }}
+        run: |
+          set -e
+          "$HOME/.aspire/bin/aspire" do deploy --verbose || "$HOME/.aspire/bin/aspire" deploy --verbose
+          ls -R src/TodojsAspire.AppHost/aspire-output || true
+          if [ ! -f src/TodojsAspire.AppHost/aspire-output/docker-compose.yaml ]; then
+            echo 'docker-compose.yaml not found after aspire deploy'
+            exit 1
+          fi
+      - name: Upload docker compose artifact
+        if: ${{ github.ref == 'refs/heads/publish' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: docker-compose
+          path: src/TodojsAspire.AppHost/aspire-output/docker-compose.yaml
+          if-no-files-found: error
