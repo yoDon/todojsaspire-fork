@@ -7,7 +7,7 @@ using TodojsAspire.ApiService;
 
 #nullable disable
 
-namespace TodojsAspire.ApiService.Migrations
+namespace TodojsAspire.MigrationService.Migrations
 {
     [DbContext(typeof(TodoDbContext))]
     partial class TodoDbContextModelSnapshot : ModelSnapshot

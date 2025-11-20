@@ -1,8 +1,9 @@
 using Microsoft.EntityFrameworkCore;
+using TodojsAspire.ApiService;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.AddSqliteDbContext<TodoDbContext>("db");
+builder.AddSqlServerDbContext<TodoDbContext>("tododb");
 
 // Add service defaults & Aspire client integrations.
 builder.AddServiceDefaults();
@@ -42,10 +43,6 @@ app.MapGet("/weatherforecast", () =>
 app.MapDefaultEndpoints();
 
 app.MapTodoEndpoints();
-
-using var scope = app.Services.CreateScope();
-var dbContext = scope.ServiceProvider.GetRequiredService<TodoDbContext>();
-await dbContext.Database.MigrateAsync();
 
 app.Run();
 
